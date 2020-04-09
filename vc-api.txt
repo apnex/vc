@@ -1,0 +1,127 @@
+Workflow
+
+Authenticate:
+POST
+https://vcenter.lab/rest/com/vmware/cis/session
+HEADER
+Authorization: "Basic YWRtaW5pc3RyYXRvckB2c3BoZXJlLmxvY2FsOlZNd2FyZTEh"
+RESPONSE
+{
+  "value": "e4bb8cf86cd8c57fbc4ed52e7bd3bdcb"
+}
+
+1) Read locations/folders
+GET
+https://vcenter.lab/rest/vcenter/folder
+HEADER
+vmware-api-session-id: "e4bb8cf86cd8c57fbc4ed52e7bd3bdcb"
+RESPONSE
+{
+  "value": [
+    {
+      "folder": "group-d1",
+      "name": "Datacenters",
+      "type": "DATACENTER"
+    },
+    {
+      "folder": "group-h4",
+      "name": "host",
+      "type": "HOST"
+    },
+    {
+      "folder": "group-n6",
+      "name": "network",
+      "type": "NETWORK"
+    },
+    {
+      "folder": "group-s5",
+      "name": "datastore",
+      "type": "DATASTORE"
+    },
+    {
+      "folder": "group-v3",
+      "name": "vm",
+      "type": "VIRTUAL_MACHINE"
+    }
+  ]
+}
+
+1) Read datacenters
+GET
+https://vcenter.lab/rest/vcenter/datacenter
+RESPONSE
+{
+  "value": [
+    {
+      "name": "datacenter",
+      "datacenter": "datacenter-2"
+    }
+  ]
+}
+
+1) Create datacenter
+POST
+https://vcenter.lab/rest/vcenter/datacenter
+BODY
+{
+	"spec": {
+		"folder": "group-d1",
+		"name": "site01"
+	}
+}
+RESPONSE
+{
+	"value": "datacenter-22"
+}
+
+2) Delete datacenter
+DELETE
+https://vcenter.lab/rest/vcenter/datacenter/datacenter-22?force=true
+RESPONSE
+no content
+
+3) GET cluster
+
+4) Add host to cluster
+POST
+https://vcenter.lab/rest/vcenter/host
+BODY
+{
+  "spec": {
+		"thumbprint_verification": "NONE",
+		"force_add": true,
+		"hostname": "sddc.lab",
+		"folder": "group-h29",
+		"user_name": "root",
+		"password": "VMware1!"
+	}
+}
+RESPONSE
+{
+  "value": "host-40"
+}
+#		"password": "VMware1&#33;"
+
+5) Read hosts
+GET
+https://vcenter.lab/rest/vcenter/host
+RESPONSE
+{
+  "value": [
+    {
+      "host": "host-40",
+      "name": "sddc.lab",
+      "connection_state": "CONNECTED",
+      "power_state": "POWERED_ON"
+    }
+  ]
+}
+
+6) Remove host
+DELETE
+https://vcenter.lab/rest/vcenter/host/host-40
+BODY
+no content
+
+7) Create VM
+
