@@ -2,6 +2,6 @@
 export GOVC_INSECURE=1
 export GOVC_URL=https://172.16.100.45/sdk
 export GOVC_USERNAME='administrator@vsphere.local'
-export GOVC_PASSWORD='ObiWan1!'
+export GOVC_PASSWORD='VMware1!SDDC'
 export GOVC_DATASTORE=ds-sddc
 export GOVC_NETWORK='pg-mgmt'
