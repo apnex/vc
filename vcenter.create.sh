@@ -51,7 +51,7 @@ if [[ -n "${FILE}" ]]; then
 	# create and mount new directory
 	echo "CREATE & MOUNT: "$VCSADIR $FILE
 	mkdir -p $VCSADIR
-	mount -o loop,ro $FILE $VCSADIR
+	mount -t iso9660 -o loop,ro $FILE $VCSADIR
 
 	if [[ "${RUN}" == "true" ]]; then
 		$VCSADIR/vcsa-cli-installer/lin64/vcsa-deploy install -v --no-ssl-certificate-verification $BASEDIR/vcsa.json --accept-eula
